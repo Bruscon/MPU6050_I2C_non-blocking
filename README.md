@@ -3,6 +3,8 @@ Note: I originally wrote this in January 2017. Only in 2021 did I dig it up and 
 
 
  My implementation of a non-blocking MPU specific I2C module.
+ Runs on TI Launchpad, Cortex-M4 microcontroller
+ 
  Three fuctions are available:
  MPUWriteReg which writes to one 8b register on the MPU
  MPUReadReg which reads a single register on the MPU
