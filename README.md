@@ -1,5 +1,5 @@
 # MPU6050_I2C_non-blocking
-Note: I originally wrote this in January 2017. Only in 2021 did I dig it up and add it to my github. 
+Note: I originally wrote this in January 2017. Only in 2021 did I dig it up and publish it here, unmodified. 
 
 
  My implementation of a non-blocking MPU specific I2C module.
@@ -19,16 +19,12 @@ ISSUE: even with waiting for IDLE, a delay must be inserted between R/W cycles. 
 		it appears 50000 is the minimum delay before something messes up.
 		powering off of 5v instead of GPIO pin makes SCL not sag, but does not lower threshhold.
 		this is only for getting valid data, not for I2C fucking up
-
 		SOLVED:you have to add a bitwise on the MCS register
-
 		while((i2c_state != IDLE) || (I2C0_MCS_R & MCS_BUSY));							//while I2C is doing stuff
 
 ISSUE: when trying to burst read on the interrupts, it asks for reg 3B and then MASTER holds CLK low???
 ISSUE: CLUE: INT pin on MPU is triggering DRDY at 4Khz... something is wrong here. will look into it more tomorrow.
-
 	SOLVED, needed a sample rate divider / DLPF
-
 
 TESTING: currently uses less than 1% of CPU time.
 TESTING: sampling at 1khz, we are getting new data extremely rapidly. The I2c bus visually appears about half full at 400kpbs
